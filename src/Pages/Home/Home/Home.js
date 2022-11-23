@@ -1,5 +1,6 @@
 import React from 'react';
 import Ads from '../Ads/Ads';
+import Product from '../Product/Product';
 import Services from './Services/Services';
 
 const Home = () => {
@@ -9,13 +10,14 @@ const Home = () => {
                 <div className="hero-overlay bg-opacity-60"></div>
                 <div className="hero-content text-center text-neutral-content">
                     <div className="max-w-md">
-                        <h1 className="mb-5 text-5xl font-bold">Wellcome To Poridhan</h1>
-                        <p className="mb-5 text-xl  font-bold">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
+                        <h1 className="mb-5 text-3xl md:text-4xl lg:text-5xl  font-bold">Wellcome To Poridhan</h1>
+                        <p className="mb-5 lg:text-xl  font-bold">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
                         <button className="btn btn-primary">Get Started</button>
                     </div>
                 </div>
             </div>
             <Ads></Ads>
+            <Product></Product>
             <Services></Services>
         </div>
     );
