@@ -2,6 +2,7 @@ import './App.css';
 import 'flowbite';
 import { RouterProvider } from 'react-router-dom';
 import router from './Routes/Route/Route';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <RouterProvider router={router}>
 
       </RouterProvider>
+      <Toaster></Toaster>
     </div>
   );
 }
