@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import { FaGoogle } from '@react-icons/all-files/fa/FaGoogle';
+import { FaFacebook } from '@react-icons/all-files/fa/FaFacebook';
+import { FaGithub } from '@react-icons/all-files/fa/FaGithub';
 
 const Login = () => {
     const { register, handleSubmit } = useForm();
-    const [data, setData] = useState('');
+    const handleLogin = data => {
+        console.log(data);
+    }
     return (
         <div>
             <div className="hero min-h-screen ">
@@ -12,46 +17,40 @@ const Login = () => {
                 <div className="hero-content flex-col ">
                     <div className="text-center ">
                         <h1 className="text-5xl font-bold mb-8">Login now!</h1>
+                        <div className=" rounded-full">
+                            <Link to="/" >
+                                <img className="w-34 h-24 mx-auto my-10" alt='' src="https://i.ibb.co/7QLwgVH/2022-11-24-012738.png" />
+                            </Link>
+                        </div>
 
                     </div>
                     <div className="card flex-shrink-0 w-full  shadow-2xl bg-base-100">
 
-                        <form onSubmit={handleSubmit((data) => setData(JSON.stringify(data)))} className="card-body rounded-lg bg-accent p-8 text-white">
-                            <input {...register("firstName")} placeholder="First name" type="text" className="input input-bordered w-96 my-6 " />
-                            <input {...register("firstName")} placeholder="Password" type="text" className="input input-bordered w-96 my-2" />
-                            <label className="label">
-                                <a href="#!" className="label-text-alt link link-hover text-white">Forgot password?</a>
-                            </label>
+                        <form onSubmit={handleSubmit(handleLogin)} className="card-body rounded-lg bg-accent p-8 text-white">
+                            <input {...register("email")} placeholder="Email" type="email" className="input input-bordered text-primary w-96 my-6 " />
+                            <input {...register("password")} placeholder="Password" type="text" className="input input-bordered text-primary w-96 my-2" />
 
-                            <input type="submit" className="btn btn-primary w-96 my-4" />
+
+                            <input type="submit" value='Login' className="btn btn-primary w-96 my-4" />
 
                             <label className="label">
-                                <p>Are you new here, <Link href="#!" className="link  link-hover text-primary font-bold">Signup</Link></p>
+                                <p>Are you new here, <Link to='/signup' className="link  link-hover text-primary font-bold">Signup</Link></p>
+
                             </label>
+                            <div className="flex flex-col w-full border-opacity-50">
+
+                                <div className="divider">OR Join With</div>
+                                <div className="flex gap-3 mt-5 mx-auto">
+                                    <button className='btn btn-outline btn-primary'><FaGoogle className='h-10 w-10' /></button>
+                                    <button className='btn btn-outline btn-primary'><FaGithub className='h-10 w-10' /></button>
+                                    <button className='btn btn-outline btn-primary'><FaFacebook className='h-10 w-10' /></button>
+                                </div>
+                            </div>
                         </form>
 
 
 
-                        {/* <form className="card-body rounded-lg bg-accent text-white">
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text text-white">Email</span>
-                                </label>
-                                <input type="text" placeholder="email" className="input input-bordered" />
-                            </div>
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text text-white">Password</span>
-                                </label>
-                                <input type="text" placeholder="password" className="input input-bordered" />
-                                <label className="label">
-                                    <a href="#!" className="label-text-alt link link-hover text-white">Forgot password?</a>
-                                </label>
-                            </div>
-                            <div className="form-control mt-6">
-                                <button className="btn btn-primary">Login</button>
-                            </div>
-                        </form> */}
+
                     </div>
                 </div>
             </div>
