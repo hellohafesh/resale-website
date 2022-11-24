@@ -7,6 +7,7 @@ import { FaGithub } from '@react-icons/all-files/fa/FaGithub';
 import { AuthContext } from '../../Context/AuthProvider';
 import toast from 'react-hot-toast';
 import { FacebookAuthProvider, GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
+import useToken from '../../Hooks/useToken';
 
 const Signup = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
@@ -14,10 +15,18 @@ const Signup = () => {
     const googleProvider = new GoogleAuthProvider();
     const githubProvider = new GithubAuthProvider();
     const facebookProvider = new FacebookAuthProvider();
+    const [userEmail, setUserEmail] = useState('')
+    const [token] = useToken(userEmail);
     const location = useLocation();
     const navigate = useNavigate();
     const from = location.state?.from?.pathname || '/';
     const [signUpError, setSignUpError] = useState('');
+
+
+    if (token) {
+        navigate('/');
+    }
+
     // google sign in
     const googleSingIn = () => {
         googleProviderLogin(googleProvider)
@@ -68,7 +77,7 @@ const Signup = () => {
 
                 updateUser(userInfo)
                     .then(() => {
-                        saveUserDB(data.name, data.email, data.seller);
+                        saveUserDB(user.uid, data.name, data.email, data.seller);
                     })
                     .catch(error => {
                         console.log(error);
@@ -81,8 +90,8 @@ const Signup = () => {
             })
     }
 
-    const saveUserDB = (name, email, seller) => {
-        const dbUser = { name, email, seller };
+    const saveUserDB = (uid, name, email, seller) => {
+        const dbUser = { uid, name, email, seller };
         fetch('http://localhost:7000/users', {
             method: 'POST',
             headers: {
@@ -97,24 +106,17 @@ const Signup = () => {
 
                 if (data.acknowledged === true) {
                     toast.success('User Create Successfully.');
-                    getUserToken(email);
+                    setUserEmail(email);
                 }
 
             })
     }
+
+    // navigate(from, { replace: true });
 
     // get user for jwt token 
-    const getUserToken = email => {
-        fetch(`http://localhost:7000/jwt?email=${email}`)
-            .then(res => res.json())
-            .then(data => {
-                if (data.accessToken) {
 
-                    localStorage.setItem('accessToken', data.accessToken)
-                    navigate(from, { replace: true });
-                }
-            })
-    }
+
 
     return (
         <div>

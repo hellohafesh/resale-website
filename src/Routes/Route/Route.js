@@ -5,12 +5,14 @@ import NavLayout from "../../Layout/NavLayout/NavLayout";
 import AddProduct from "../../Pages/Dashboard/AddProduct/AddProduct";
 import AllBuyer from "../../Pages/Dashboard/AllBuyer/AllBuyer";
 import AllSeller from "../../Pages/Dashboard/AllSeller/AllSeller";
+import AllUsers from "../../Pages/Dashboard/AllUsers/AllUsers";
 import Dashboard from "../../Pages/Dashboard/Dashboard";
 import MyProduct from "../../Pages/Dashboard/MyProducts/MyProduct";
 import ReportItems from "../../Pages/Dashboard/ReportItems/ReportItems";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
 import Signup from "../../Pages/Signup/Signup";
+import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
 
 const router = createBrowserRouter([
@@ -31,7 +33,7 @@ const router = createBrowserRouter([
         element: <PrivateRoutes><DashboardLayout></DashboardLayout></PrivateRoutes>,
         children: [
             {
-                path: '/dashboard/myorder',
+                path: '/dashboard',
                 element: <PrivateRoutes><Dashboard></Dashboard></PrivateRoutes>
             },
             {
@@ -44,15 +46,19 @@ const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/allseller',
-                element: <PrivateRoutes><AllSeller></AllSeller></PrivateRoutes>
+                element: <AdminRoute><AllSeller></AllSeller></AdminRoute>
             },
             {
                 path: '/dashboard/allbuyer',
-                element: <PrivateRoutes><AllBuyer></AllBuyer></PrivateRoutes>
+                element: <AdminRoute><AllBuyer></AllBuyer></AdminRoute>
+            },
+            {
+                path: '/dashboard/allusers',
+                element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
             },
             {
                 path: '/dashboard/report',
-                element: <PrivateRoutes> <ReportItems></ReportItems></PrivateRoutes>
+                element: <AdminRoute> <ReportItems></ReportItems></AdminRoute>
             },
         ]
     },

@@ -1,22 +1,35 @@
 import React, { useContext } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
+import useAdmin from '../../Hooks/AdminHook/useAdmin';
+import useSeller from '../../Hooks/SellerHook/useSeller';
 import Footer from '../../Pages/Sheard/Footer/Footer';
 import Nav from '../../Pages/Sheard/Nav/Nav';
 
 const DashboardLayout = () => {
     const { user } = useContext(AuthContext);
+    const [isAdmin] = useAdmin(user?.email);
+    const [isSeller] = useSeller(user?.email);
 
     const menuItem = <React.Fragment>
 
 
-        <li><Link className='rounded-box' to="/dashboard/myorder">My orders</Link></li>
-        <li><Link className='rounded-box' to="/dashboard/myproducts">My Products</Link></li>
-        <li><Link className='rounded-box' to="/dashboard/addproduct">Add product </Link></li>
+        <li><Link className='rounded-box' to="/dashboard">My orders</Link></li>
 
-        <li><Link className='rounded-box' to="/dashboard/allseller">Sellers</Link></li>
-        <li><Link className='rounded-box' to="/dashboard/allbuyer">Buyers</Link></li>
-        <li><Link className='rounded-box' to="/dashboard/report">Reported Items</Link></li>
+        {
+            isSeller && <>
+                <li><Link className='rounded-box' to="/dashboard/myproducts">My Products</Link></li>
+                <li><Link className='rounded-box' to="/dashboard/addproduct">Add product </Link></li>
+            </>
+        }
+        {
+            isAdmin && <>
+                <li><Link className='rounded-box' to="/dashboard/allseller">Sellers</Link></li>
+                <li><Link className='rounded-box' to="/dashboard/allbuyer">Buyers</Link></li>
+                <li><Link className='rounded-box' to="/dashboard/allusers">Users</Link></li>
+                <li><Link className='rounded-box' to="/dashboard/report">Reported </Link></li>
+            </>
+        }
 
     </React.Fragment>
     return (

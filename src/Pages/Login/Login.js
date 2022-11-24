@@ -6,6 +6,7 @@ import { FaFacebook } from '@react-icons/all-files/fa/FaFacebook';
 import { FaGithub } from '@react-icons/all-files/fa/FaGithub';
 import { AuthContext } from '../../Context/AuthProvider';
 import { FacebookAuthProvider, GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
+import useToken from '../../Hooks/useToken';
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
@@ -16,7 +17,14 @@ const Login = () => {
     const facebookProvider = new FacebookAuthProvider();
     const location = useLocation();
     const navigate = useNavigate();
+    const [userlogEmail, setUserlogEmail] = useState('');
+    const [token] = useToken(userlogEmail);
     const from = location.state?.from?.pathname || '/';
+
+
+    if (token) {
+        navigate(from, { replace: true });
+    }
 
     // google sign in
     const googleSingIn = () => {
@@ -61,7 +69,8 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
-                navigate(from, { replace: true });
+                setUserlogEmail(data.email);
+
             })
             .catch(error => {
                 console.log(error);
