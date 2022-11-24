@@ -54,7 +54,7 @@ const Product = () => {
 
             <h4 className='text-5xl text-center my-4'>Latest Products</h4>
             <div className=" grid mt-16  gap-6 grid-cols-1  md:grid-cols-2 lg:grid-cols-3">
-                <div className="card w-96 bg-base-100 shadow-xl">
+                <div className="card w-96 mx-auto  bg-accent text-white shadow-xl">
                     <figure><img src="https://placeimg.com/400/225/arch" alt="Shoes" /></figure>
                     <div className="card-body">
                         <h2 className="card-title">
@@ -72,7 +72,7 @@ const Product = () => {
 
 
 
-                <div className="card w-96 bg-base-100 shadow-xl">
+                <div className="card w-96 mx-auto text-white bg-accent shadow-xl">
                     <figure><img src="https://placeimg.com/400/225/arch" alt="Shoes" /></figure>
                     <div className="card-body">
                         <h2 className="card-title">
@@ -90,7 +90,7 @@ const Product = () => {
 
 
 
-                <div className="card w-96 bg-base-100 shadow-xl">
+                <div className="card w-96 mx-auto text-white bg-accent shadow-xl">
                     <figure><img src="https://placeimg.com/400/225/arch" alt="Shoes" /></figure>
                     <div className="card-body">
                         <h2 className="card-title">
