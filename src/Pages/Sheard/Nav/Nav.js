@@ -45,7 +45,7 @@ const Nav = () => {
                     </ul>
                 </div>
                 <div className=" rounded-full">
-                    <Link to="/" ><img className="w-24 h-14" alt='' src="https://i.ibb.co/7QLwgVH/2022-11-24-012738.png" /></Link>
+                    <Link to="/" ><img className="w-24 h-14" alt='' src="https://i.ibb.co/WgBX8rJ/2022-11-24-012738-removebg-preview.png" /></Link>
                 </div>
             </div>
 

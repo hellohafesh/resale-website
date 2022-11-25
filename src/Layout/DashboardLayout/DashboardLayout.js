@@ -27,6 +27,7 @@ const DashboardLayout = () => {
                 <li><Link className='rounded-box' to="/dashboard/allseller">Sellers</Link></li>
                 <li><Link className='rounded-box' to="/dashboard/allbuyer">Buyers</Link></li>
                 <li><Link className='rounded-box' to="/dashboard/allusers">Users</Link></li>
+                <li><Link className='rounded-box' to="/dashboard/onlyUsers">Only Users</Link></li>
                 <li><Link className='rounded-box' to="/dashboard/report">Reported </Link></li>
             </>
         }
