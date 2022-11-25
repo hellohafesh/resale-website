@@ -11,6 +11,8 @@ import useToken from '../../Hooks/useToken';
 
 const Signup = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const imageHostingKey = process.env.REACT_APP_imagebb_key;
+    // console.log(imageHostingKey);
     const { googleProviderLogin, githubProviderLogin, facebookProviderLogin, createUser, updateUser } = useContext(AuthContext);
     const googleProvider = new GoogleAuthProvider();
     const githubProvider = new GithubAuthProvider();
@@ -62,36 +64,59 @@ const Signup = () => {
 
     // Normal sign in
     const handleSignup = data => {
-        // console.log(data);
-        setSignUpError('');
-        createUser(data.email, data.password)
-            .then(result => {
-                const user = result.user;
-                console.log(user);
+        console.log(data);
 
-                const userInfo = {
-                    displayName: data.name,
-                    photoURL: data.name
+        //image host 
+        const imagee = data.image[0];
+        // console.log(image);
+        const fromData = new FormData();
+        fromData.append('image', imagee)
+        const url = `https://api.imgbb.com/1/upload?expiration=600&key=${imageHostingKey}`;
+        fetch(url, {
+            method: 'POST',
+            body: fromData
+        })
+            .then(res => res.json())
+            .then(imageData => {
+                if (imageData.success) {
+                    const imgurl = imageData.data.url;
+                    console.log(imgurl);
+
+
+                    setSignUpError('');
+                    createUser(data.email, data.password)
+                        .then(result => {
+                            const user = result.user;
+                            // console.log(user);
+
+                            const userInfo = {
+                                displayName: data.name,
+                                photoURL: imgurl
+                            }
+                            // console.log(userInfo);
+
+                            updateUser(userInfo)
+                                .then(() => {
+                                    saveUserDB(user.uid, data.name, data.email, data.seller, user.photoURL);
+                                })
+                                .catch(error => {
+                                    console.log(error);
+                                    setSignUpError(error.message);
+                                })
+                        })
+                        .catch(error => {
+                            console.log(error);
+                            setSignUpError(error.message);
+                        })
                 }
-                // console.log(userInfo);
+            })
 
-                updateUser(userInfo)
-                    .then(() => {
-                        saveUserDB(user.uid, data.name, data.email, data.seller);
-                    })
-                    .catch(error => {
-                        console.log(error);
-                        setSignUpError(error.message);
-                    })
-            })
-            .catch(error => {
-                console.log(error);
-                setSignUpError(error.message);
-            })
+
+
     }
 
-    const saveUserDB = (uid, name, email, seller) => {
-        const dbUser = { uid, name, email, seller };
+    const saveUserDB = (uid, name, email, seller, photo) => {
+        const dbUser = { uid, name, email, seller, photo };
         fetch('http://localhost:7000/users', {
             method: 'POST',
             headers: {
@@ -151,9 +176,9 @@ const Signup = () => {
                                 placeholder="Enter Your Mobail No" type="phone" className="input input-bordered text-primary w-96 my-2 " />
                             {errors.phone && <p role='alert' className='text-red-400 '>{errors.phone?.message}</p>}
 
-                            <input {...register("photo")}
+                            <input {...register("image")}
                                 type="file" className="input input-bordered text-primary w-96 my-2 " />
-                            {errors.photo && <p role='alert' className='text-red-400 '>{errors.photo?.message}</p>}
+                            {errors.image && <p role='alert' className='text-red-400 '>{errors.image?.message}</p>}
 
                             <input {...register("password",
                                 { required: "Password  is required", minLength: { value: 6, message: "Password must be 6 charecter " } },)}
