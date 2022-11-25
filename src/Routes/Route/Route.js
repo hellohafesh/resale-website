@@ -8,7 +8,6 @@ import AllSeller from "../../Pages/Dashboard/AllSeller/AllSeller";
 import AllUsers from "../../Pages/Dashboard/AllUsers/AllUsers";
 import Dashboard from "../../Pages/Dashboard/Dashboard";
 import MyProduct from "../../Pages/Dashboard/MyProducts/MyProduct";
-import OnlyUsers from "../../Pages/Dashboard/OnlyUsers/OnlyUsers";
 import ReportItems from "../../Pages/Dashboard/ReportItems/ReportItems";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
@@ -57,10 +56,6 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/allusers',
                 element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
-            },
-            {
-                path: '/dashboard/onlyUsers',
-                element: <AdminRoute> <OnlyUsers></OnlyUsers></AdminRoute>
             },
             {
                 path: '/dashboard/report',

@@ -1,27 +1,59 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useState } from 'react';
 import toast from 'react-hot-toast';
+import ConfirmationModal from '../../Sheard/ConfirmationModal/ConfirmationModal';
 
 const AllUsers = () => {
+    const [deleteUser, setDeleteUser] = useState(null);
+
+    const closeModal = () => {
+        setDeleteUser(null);
+    }
 
 
+    // load all users in clinte
     const url = 'http://localhost:7000/users';
     const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const res = await fetch(url, {
-                headers: {
-                    authorization: `bearer ${localStorage.getItem('accessToken')}`
-                }
-            });
-            const data = await res.json();
-            return data;
+            try {
+                const res = await fetch(url, {
+                    headers: {
+                        authorization: `bearer ${localStorage.getItem('accessToken')}`
+                    }
+                });
+                const data = await res.json();
+                return data;
+            }
+            catch (error) {
+                console.log(error);
+            }
 
         }
     })
 
+    //delete user
+    const deleteUserDB = user => {
+        fetch(`http://localhost:7000/userdelete/${user._id}`, {
+            method: 'DELETE',
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                // console.log(data)
+                if (data.deletedCount > 0) {
+                    toast.success('Successfull Delete ');
+                    closeModal(null);
+                    refetch();
 
+                }
+            })
 
+    }
+
+    //admin made api
     const handleMakeAdmin = id => {
         fetch(`http://localhost:7000/users/admin/${id}`, {
             method: 'PUT',
@@ -76,7 +108,8 @@ const AllUsers = () => {
                                 <td>{user.seller ? <>Seller</> : <>User</>}</td>
                                 <td>{user?.role !== 'admin' ? <button onClick={() => handleMakeAdmin(user._id)} className="btn btn-ghost btn-xs">Make Admin</button> : <>Admin</>}</td>
                                 <th>
-                                    <button className="btn btn-ghost btn-xs">Delete</button>
+                                    <label htmlFor="modal" onClick={() => setDeleteUser(user)} className="btn  btn-ghost btn-xs">Delete</label>
+
                                 </th>
                             </tr>)
                         }
@@ -85,6 +118,17 @@ const AllUsers = () => {
 
 
                 </table>
+                {
+                    deleteUser && <ConfirmationModal
+                        title={`Want To Delete User ?`}
+                        message={`If You Delete ${deleteUser.name} . It can not be restore.`}
+                        classs={`btn btn-error`}
+                        closeModal={closeModal}
+                        deleteUserDB={deleteUserDB}
+                        data={deleteUser}
+                        btnName="Delete"
+                    ></ConfirmationModal>
+                }
             </div>
 
 
