@@ -35,7 +35,7 @@ const AddProduct = () => {
                     const imgurl = imageData.data.url;
                     console.log(imgurl);
 
-                    saveproductDB(user.uid, data.email, data.name, data.price, data.condition, data.category, data.year, data.phone, data.message, date, imgurl);
+                    saveproductDB(user.uid, data.email, data.name, data.price, data.condition, data.location, data.category, data.year, data.phone, data.message, date, imgurl, user.photoURL);
 
 
 
@@ -43,8 +43,8 @@ const AddProduct = () => {
             })
 
 
-        const saveproductDB = (uid, email, name, price, condition, category, year, phone, message, date, photo) => {
-            const product = { uid, email, name, price, condition, category, year, phone, message, date, photo };
+        const saveproductDB = (uid, email, name, price, condition, location, category, year, phone, message, date, photo, sellerPhoto) => {
+            const product = { uid, email, name, price, condition, location, category, year, phone, message, date, photo, sellerPhoto };
             fetch('http://localhost:7000/addproduct', {
                 method: 'POST',
                 headers: {
@@ -76,7 +76,7 @@ const AddProduct = () => {
 
                         <div className=" rounded-full">
                             <Link to="/" >
-                                <img className="w-34 h-24 mx-auto my-10" alt='' src="https://i.ibb.co/7QLwgVH/2022-11-24-012738.png" />
+                                <img className="w-34 h-24 mx-auto my-10" alt='' src="https://i.ibb.co/WgBX8rJ/2022-11-24-012738-removebg-preview.png" />
                             </Link>
                         </div>
                         <h1 className="text-5xl font-bold mb-8">Add New Product</h1>

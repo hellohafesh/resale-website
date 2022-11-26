@@ -86,7 +86,7 @@ const Login = () => {
                         <h1 className="text-5xl font-bold mb-8">Login now!</h1>
                         <div className=" rounded-full">
                             <Link to="/" >
-                                <img className="w-34 h-24 mx-auto my-10" alt='' src="https://i.ibb.co/7QLwgVH/2022-11-24-012738.png" />
+                                <img className="w-34 h-24 mx-auto my-10" alt='' src="https://i.ibb.co/WgBX8rJ/2022-11-24-012738-removebg-preview.png" />
                             </Link>
                         </div>
 

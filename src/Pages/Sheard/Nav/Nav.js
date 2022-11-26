@@ -17,8 +17,9 @@ const Nav = () => {
     }
     const menuItem = <React.Fragment>
         <li><Link className='rounded-box' to="/">Home</Link></li>
-        <li><Link className='rounded-box' to="/">All Product </Link></li>
+        <li><Link className='rounded-box' to="/allproducts">All Product </Link></li>
         <li><Link className='rounded-box' to="/dashboard">Dashbord</Link></li>
+        <li><Link className='rounded-box' to="/blogs">Blogs</Link></li>
         {
             user?.uid ? <>
                 <li><Link className='rounded-box' to="/">My Card</Link></li>
