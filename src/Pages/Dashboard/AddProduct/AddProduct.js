@@ -1,3 +1,4 @@
+import { format } from 'date-fns';
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -8,19 +9,22 @@ const AddProduct = () => {
 
     const { register, formState: { errors }, handleSubmit } = useForm();
     const { user } = useContext(AuthContext);
+    const finddate = new Date();
+    const date = format(finddate, 'PP');
+    // console.log(d)
     const navigate = useNavigate();
     // console.log(user)
     const imageHostingKey = process.env.REACT_APP_imagebb_key;
 
 
     const handleAddProduct = data => {
-        console.log(data);
+        // console.log(data);
 
         const imagee = data.image[0];
         // console.log(image);
         const fromData = new FormData();
         fromData.append('image', imagee)
-        const url = `https://api.imgbb.com/1/upload?expiration=600&key=${imageHostingKey}`;
+        const url = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`;
         fetch(url, {
             method: 'POST',
             body: fromData
@@ -31,7 +35,7 @@ const AddProduct = () => {
                     const imgurl = imageData.data.url;
                     console.log(imgurl);
 
-                    saveproductDB(user.uid, data.email, data.name, data.price, data.condition, data.category, data.year, data.phone, data.message, imgurl);
+                    saveproductDB(user.uid, data.email, data.name, data.price, data.condition, data.category, data.year, data.phone, data.message, date, imgurl);
 
 
 
@@ -39,8 +43,8 @@ const AddProduct = () => {
             })
 
 
-        const saveproductDB = (uid, email, name, price, condition, category, year, phone, message, photo) => {
-            const product = { uid, email, name, price, condition, category, year, phone, message, photo };
+        const saveproductDB = (uid, email, name, price, condition, category, year, phone, message, date, photo) => {
+            const product = { uid, email, name, price, condition, category, year, phone, message, date, photo };
             fetch('http://localhost:7000/addproduct', {
                 method: 'POST',
                 headers: {
@@ -112,13 +116,13 @@ const AddProduct = () => {
                             </select>
 
                             <input {...register("email",
-                                { required: "Email Adress is required" })}
+                            )}
                                 placeholder="Enter Your Email" type="email" defaultValue={user?.email} className="input input-bordered text-primary w-96 my-2 " />
                             {errors.email && <p role='alert' className='text-red-400 '>{errors.email?.message}</p>}
 
                             <input {...register("year",
                                 { required: "year is required" })}
-                                placeholder="Enter Your product year" type="email" defaultValue={user?.email} className="input input-bordered text-primary w-96 my-2 " />
+                                placeholder="Enter Your product year" type="number" className="input input-bordered text-primary w-96 my-2 " />
                             {errors.year && <p role='alert' className='text-red-400 '>{errors.year?.message}</p>}
 
                             <input {...register("phone",

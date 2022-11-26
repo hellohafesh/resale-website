@@ -31,7 +31,7 @@ const AllUsers = () => {
 
         }
     })
-
+    // console.log(users);
     //delete user
     const deleteUserDB = user => {
         fetch(`http://localhost:7000/userdelete/${user._id}`, {
@@ -82,6 +82,7 @@ const AllUsers = () => {
                     <thead>
                         <tr>
 
+                            <th>Image</th>
                             <th>Name</th>
                             <th>Email</th>
                             <th>Role</th>
@@ -93,7 +94,13 @@ const AllUsers = () => {
 
                         {
                             users.map(user => <tr key={user._id}>
-
+                                <td>
+                                    <div className="avatar">
+                                        <div className="w-32 rounded">
+                                            <img alt='' src={user.photo} />
+                                        </div>
+                                    </div>
+                                </td>
                                 <td>
                                     <div className="flex items-center space-x-3">
 

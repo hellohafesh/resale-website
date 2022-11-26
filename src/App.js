@@ -3,6 +3,7 @@ import 'flowbite';
 import { RouterProvider } from 'react-router-dom';
 import router from './Routes/Route/Route';
 import { Toaster } from 'react-hot-toast';
+import 'react-day-picker/dist/style.css';
 
 
 function App() {
