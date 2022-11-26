@@ -1,9 +1,11 @@
+import { FaUserCircle } from '@react-icons/all-files/fa/FaUserCircle';
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthProvider';
 
 const Nav = () => {
     const { user, logOut } = useContext(AuthContext);
+    // console.log(user)
 
     const handleLogOut = () => {
         logOut()
@@ -53,11 +55,13 @@ const Nav = () => {
                 <ul className="menu hidden lg:flex menu-horizontal p-0  ">
                     {menuItem}
                 </ul>
-                <div className=" rounded-full">
-                    <img className="w-10 rounded-full" alt='' src="https://placeimg.com/80/80/people" />
-                </div>
+                {user ? <div className=" rounded-full">
+                    <img className="w-10 h-10 rounded-full" alt='' src={user.photoURL} />
+                </div> : < div className=" rounded-full">
+                    <FaUserCircle className='h-10 w-10 text-primary' />
+                </div>}
             </div>
-        </div>
+        </div >
 
 
     );

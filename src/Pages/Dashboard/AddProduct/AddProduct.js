@@ -1,12 +1,14 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthProvider';
 
 const AddProduct = () => {
 
     const { register, formState: { errors }, handleSubmit } = useForm();
     const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
     // console.log(user)
     const imageHostingKey = process.env.REACT_APP_imagebb_key;
 
@@ -28,8 +30,36 @@ const AddProduct = () => {
                 if (imageData.success) {
                     const imgurl = imageData.data.url;
                     console.log(imgurl);
+
+                    saveproductDB(user.uid, data.email, data.name, data.price, data.condition, data.category, data.year, data.phone, data.message, imgurl);
+
+
+
                 }
             })
+
+
+        const saveproductDB = (uid, email, name, price, condition, category, year, phone, message, photo) => {
+            const product = { uid, email, name, price, condition, category, year, phone, message, photo };
+            fetch('http://localhost:7000/addproduct', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(product)
+            })
+                .then(res => res.json())
+                .then(data => {
+
+                    // console.log('save user', data);
+
+                    if (data.acknowledged === true) {
+                        toast.success('Product Upload Successfully.');
+                        navigate('/dashboard/myproducts');
+                    }
+
+                })
+        }
 
 
     }
@@ -86,6 +116,11 @@ const AddProduct = () => {
                                 placeholder="Enter Your Email" type="email" defaultValue={user?.email} className="input input-bordered text-primary w-96 my-2 " />
                             {errors.email && <p role='alert' className='text-red-400 '>{errors.email?.message}</p>}
 
+                            <input {...register("year",
+                                { required: "year is required" })}
+                                placeholder="Enter Your product year" type="email" defaultValue={user?.email} className="input input-bordered text-primary w-96 my-2 " />
+                            {errors.year && <p role='alert' className='text-red-400 '>{errors.year?.message}</p>}
+
                             <input {...register("phone",
                                 { required: "Phone Number is required", minLength: { value: 10, message: "Phone No must be 10 charecter " } })}
                                 placeholder="Enter Your Mobail No" type="phone" className="input input-bordered text-primary w-96 my-2 " />
@@ -100,6 +135,10 @@ const AddProduct = () => {
                                 placeholder="Enter location" type="text" className="input input-bordered text-primary w-96 my-2" />
                             {errors.location && <p role='alert' className='text-red-400 '>{errors.location?.message}</p>}
                             {/* {signUpError && <p className='text-red-400 '>{signUpError} </p>} */}
+
+                            <input {...register("message")}
+                                type="text" placeholder="Write About Your Product" className="input input-bordered text-primary w-96 my-2 " />
+                            {errors.message && <p role='alert' className='text-red-400 '>{errors.image?.message}</p>}
 
 
 
