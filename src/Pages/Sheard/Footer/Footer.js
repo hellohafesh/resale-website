@@ -6,20 +6,20 @@ const Footer = () => {
         <footer className="footer p-10 text-primary mt-20 ">
             <div className='mx-auto'>
                 <img className='h-24 w-40' src="https://i.ibb.co/WgBX8rJ/2022-11-24-012738-removebg-preview.png" alt="" />
-                <p>ACME Industries Ltd.<br />Providing reliable tech since 1992</p>
+                <p>Poridhan Industries Ltd.<br /> A Partner Of Poridhan text.Ltd.<br />Providing reliable Dress since 1992  </p>
             </div>
             <div className='mx-auto'>
                 <span className="footer-title">Services</span>
                 <Link className="link link-hover">Design</Link>
-                <Link className="link link-hover">Marketing</Link>
+                <Link className="link link-hover">Dressing</Link>
                 <Link className="link link-hover">Branding</Link>
                 <Link className="link link-hover">Advertisement</Link>
             </div>
             <div className='mx-auto'>
                 <span className="footer-title">Services</span>
-                <Link className="link link-hover">Branding</Link>
-                <Link className="link link-hover">Design</Link>
-                <Link className="link link-hover">Marketing</Link>
+                <Link className="link link-hover">All Category</Link>
+                <Link className="link link-hover">Partner</Link>
+                <Link className="link link-hover">Services</Link>
                 <Link className="link link-hover">Advertisement</Link>
             </div>
             <div className=' mx-auto lg:mt-8'>

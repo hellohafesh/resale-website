@@ -1,65 +1,59 @@
+import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 
 const Ads = () => {
-    const us = false;
+
+
+
+    const url = 'http://localhost:7000/advetice';
+    const { data: adds = [] } = useQuery({
+        queryKey: ['adds'],
+        queryFn: async () => {
+            try {
+                const res = await fetch(url, {
+                    headers: {
+                        authorization: `bearer ${localStorage.getItem('accessToken')}`
+                    }
+                });
+                const data = await res.json();
+                return data;
+            }
+            catch (error) {
+                console.log(error);
+            }
+
+        }
+    })
+
     return (
-        <div>
+
+        <div className='mt-24 grid gap-[34px] justify-items-center grid-cols-1 justify-center md:grid-cols-2 lg:grid-cols-4'>
             {
-                us &&
-                <>
-                    <div className="card w-96 bg-base-100 shadow-xl">
-                        <figure><img src="https://placeimg.com/400/225/arch" alt="Shoes" /></figure>
+                adds.map(add => <div key={add._id} className="indicator">
+                    <span className="indicator-item badge badge-primary">Adds</span>
+                    <div className="card w-60  bg-sky-300 shadow-xl">
+
                         <div className="card-body">
-                            <h2 className="card-title">
-                                Shoes!
-                                <div className="badge badge-secondary">Ads</div>
-                            </h2>
-                            <p>If a dog chews shoes whose shoes does he choose?</p>
-                            <div className="card-actions justify-end">
-                                <div className="badge badge-outline">Fashion</div>
-                                <div className="badge badge-outline">Products</div>
+                            <p>Best Sell</p>
+                            <h2 className="card-title">{add.name}</h2>
+                            <p><span className='font-bold'>Discription :</span> {add.message}</p>
+                            <div className='flex justify-around '>
+                                <p>Price : $ {add.price}</p>
+                                <button className='btn btn-primary btn-xs'>Buy</button>
                             </div>
                         </div>
+                        <figure><img className='h-52 w-60' src={add.photo} alt="Shoes" /></figure>
                     </div>
-
-
-                    <div className="card w-96 bg-base-100 shadow-xl">
-                        <figure><img src="https://placeimg.com/400/225/arch" alt="Shoes" /></figure>
-                        <div className="card-body">
-                            <h2 className="card-title">
-                                Shoes!
-                                <div className="badge badge-secondary">Ads</div>
-                            </h2>
-                            <p>If a dog chews shoes whose shoes does he choose?</p>
-                            <div className="card-actions justify-end">
-                                <div className="badge badge-outline">Fashion</div>
-                                <div className="badge badge-outline">Products</div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                    <div className="card w-96 bg-base-100 shadow-xl">
-                        <figure><img src="https://placeimg.com/400/225/arch" alt="Shoes" /></figure>
-                        <div className="card-body">
-                            <h2 className="card-title">
-                                Shoes!
-                                <div className="badge badge-secondary">Ads</div>
-                            </h2>
-                            <p>If a dog chews shoes whose shoes does he choose?</p>
-                            <div className="card-actions justify-end">
-                                <div className="badge badge-outline">Fashion</div>
-                                <div className="badge badge-outline">Products</div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                </>
+                </div>
+                )
             }
         </div>
+
+
+
+
+
+
     );
 };
 

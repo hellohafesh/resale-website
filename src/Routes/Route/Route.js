@@ -4,7 +4,9 @@ import MainLayout from "../../Layout/MainLayout/MainLayout";
 import NavLayout from "../../Layout/NavLayout/NavLayout";
 import AllProduct from "../../Pages/AllProduct/AllProduct";
 import Blogs from "../../Pages/Blogs/Blogs";
+import CategoryProduct from "../../Pages/CategoryProduct/CategoryProduct";
 import AddProduct from "../../Pages/Dashboard/AddProduct/AddProduct";
+import AddverticeAdd from "../../Pages/Dashboard/AddverticeAdd/AddverticeAdd";
 import AllBuyer from "../../Pages/Dashboard/AllBuyer/AllBuyer";
 import AllSeller from "../../Pages/Dashboard/AllSeller/AllSeller";
 import AllUsers from "../../Pages/Dashboard/AllUsers/AllUsers";
@@ -33,6 +35,11 @@ const router = createBrowserRouter([
                 element: <AllProduct></AllProduct>
             },
             {
+                path: '/allproducts/:Category',
+                element: <CategoryProduct></CategoryProduct>,
+                loader: ({ params }) => fetch(`http://localhost:7000/products/${params.Category}`)
+            },
+            {
                 path: '/blogs',
                 element: <Blogs></Blogs>
             },
@@ -54,6 +61,10 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/addproduct',
                 element: <SellerRoute><AddProduct></AddProduct></SellerRoute>
+            },
+            {
+                path: '/dashboard/advertice',
+                element: <SellerRoute><AddverticeAdd></AddverticeAdd></SellerRoute>
             },
             {
                 path: '/dashboard/allseller',

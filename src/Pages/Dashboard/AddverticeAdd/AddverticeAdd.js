@@ -5,8 +5,7 @@ import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthProvider';
 
-const AddProduct = () => {
-
+const AddverticeAdd = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
     const { user } = useContext(AuthContext);
     const finddate = new Date();
@@ -33,19 +32,17 @@ const AddProduct = () => {
             .then(imageData => {
                 if (imageData.success) {
                     const imgurl = imageData.data.url;
-                    // console.log(imgurl);
+                    console.log(imgurl);
 
                     saveproductDB(user.uid, data.email, data.name, data.price, data.originalprice, data.condition, data.location, data.category, data.year, data.phone, data.message, date, imgurl, user.photoURL);
-
-
 
                 }
             })
 
 
-        const saveproductDB = (uid, email, name, price, originalprice, condition, location, category, year, phone, message, date, photo, sellerPhoto) => {
+        const saveproductDB = (uid, email, name, price, condition, originalprice, location, category, year, phone, message, date, photo, sellerPhoto) => {
             const product = { uid, email, name, price, originalprice, condition, location, category, year, phone, message, date, photo, sellerPhoto };
-            fetch('http://localhost:7000/addproduct', {
+            fetch('http://localhost:7000/advetice', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -69,7 +66,6 @@ const AddProduct = () => {
     }
     return (
         <div>
-
             <div className="hero ">
 
                 <div className="hero-content flex-col ">
@@ -80,17 +76,29 @@ const AddProduct = () => {
                                 <img className="w-34 h-24 mx-auto my-10" alt='' src="https://i.ibb.co/WgBX8rJ/2022-11-24-012738-removebg-preview.png" />
                             </Link>
                         </div>
-                        <h1 className="text-5xl font-bold mb-8">Add New Product</h1>
+                        <h1 className="text-2xl font-bold mb-8">Advertisement On Home Page</h1>
 
                     </div>
                     <div className="card flex-shrink-0 w-full  shadow-2xl bg-base-100">
 
                         <form onSubmit={handleSubmit(handleAddProduct)} className="card-body rounded-lg bg-accent p-8 text-white">
+
+
                             <input {...register("name",
                                 { required: "Product name is required" })}
                                 placeholder="Product Name" type="text" className="input input-bordered text-primary w-96 my-2 " />
                             {errors.name && <p role='alert' className='text-red-400 '>{errors.name?.message}</p>}
 
+
+                            <input {...register("originalprice",
+                                { required: "price  is required" })}
+                                placeholder="Enter Price" type="number" className="input input-bordered text-primary w-96 my-2 " />
+                            {errors.originalprice && <p role='alert' className='text-red-400 '>{errors.originalprice?.message}</p>}
+
+                            <input {...register("price",
+                                { required: "price  is required" })}
+                                placeholder="Enter Price" type="number" className="input input-bordered text-primary w-96 my-2 " />
+                            {errors.price && <p role='alert' className='text-red-400 '>{errors.price?.message}</p>}
 
                             <select {...register("condition",
                                 { required: "Condition  is required" })} className="select select-bordered text-primary w-96 my-2 ">
@@ -109,17 +117,6 @@ const AddProduct = () => {
                                 <option value='baby'>Baby</option>
                             </select>
 
-                            <input {...register("originalprice",
-                                { required: "price  is required" })}
-                                placeholder="Enter Old Price" type="number" className="input input-bordered text-primary w-96 my-2 " />
-                            {errors.originalprice && <p role='alert' className='text-red-400 '>{errors.originalprice?.message}</p>}
-
-                            <input {...register("price",
-                                { required: "price  is required" })}
-                                placeholder="Enter Price" type="number" className="input input-bordered text-primary w-96 my-2 " />
-                            {errors.price && <p role='alert' className='text-red-400 '>{errors.price?.message}</p>}
-
-
                             <input {...register("email",
                             )}
                                 placeholder="Enter Your Email" type="email" defaultValue={user?.email} className="input input-bordered text-primary w-96 my-2 " />
@@ -127,7 +124,7 @@ const AddProduct = () => {
 
                             <input {...register("year",
                                 { required: "year is required" })}
-                                placeholder="Enter Your product Buying year" type="number" className="input input-bordered text-primary w-96 my-2 " />
+                                placeholder="Enter Your product year" type="number" className="input input-bordered text-primary w-96 my-2 " />
                             {errors.year && <p role='alert' className='text-red-400 '>{errors.year?.message}</p>}
 
                             <input {...register("phone",
@@ -144,6 +141,7 @@ const AddProduct = () => {
                                 placeholder="Enter location" type="text" className="input input-bordered text-primary w-96 my-2" />
                             {errors.location && <p role='alert' className='text-red-400 '>{errors.location?.message}</p>}
 
+
                             <input {...register("message")}
                                 type="text" placeholder="Write About Your Product" className="input input-bordered text-primary w-96 my-2 " />
                             {errors.message && <p role='alert' className='text-red-400 '>{errors.image?.message}</p>}
@@ -152,7 +150,7 @@ const AddProduct = () => {
 
 
 
-                            <input type="submit" value='Upload Your Product' className="btn btn-primary w-96 my-4" />
+                            <input type="submit" value='Upload Addvertise' className="btn btn-primary w-96 my-4" />
 
 
 
@@ -168,4 +166,4 @@ const AddProduct = () => {
     );
 };
 
-export default AddProduct;
+export default AddverticeAdd;

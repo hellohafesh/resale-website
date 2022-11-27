@@ -1,47 +1,21 @@
-import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
 import PrivateRoutes from '../../Routes/PrivateRoutes/PrivateRoutes';
 import BookingModal from '../Sheard/BookingModal/BookingModal';
 
-const AllProduct = () => {
+const CategoryProduct = () => {
+    const products = useLoaderData();
     const { user } = useContext(AuthContext);
     const [booking, setBooking] = useState(null);
-    const [category, setCategory] = useState("all");
     const navigate = useNavigate();
+
     const { register, handleSubmit } = useForm();
     const closeModal = () => {
         setBooking(null);
     }
-
-
-
-    const url = `http://localhost:7000/products/${category}`;
-    const { data: products = [], refetch } = useQuery({
-        queryKey: ['products'],
-        queryFn: async () => {
-            try {
-                const res = await fetch(url, {
-                    headers: {
-                        authorization: `bearer ${localStorage.getItem('accessToken')}`
-                    }
-                });
-                const data = await res.json();
-                return data;
-            }
-            catch (error) {
-                console.log(error);
-            }
-
-        }
-    })
-
-
-
-
     const handleBuyProduct = data => {
         console.log(data);
         bookingDB(booking.name, booking.photo, data.buyername, data.price, data.buyerLocation, data.buyerEmail, booking.uid, user.uid, booking._id);
@@ -66,32 +40,15 @@ const AllProduct = () => {
                     closeModal();
                     toast.success('Product Booking Successfully.');
                     navigate('/dashboard');
-                    refetch();
                 }
 
             })
 
     }
-
-
-
-    const handlelCategory = (data) => {
-        setCategory(data);
-        console.log(data);
-        refetch();
-    }
-
     return (
         <div>
-            <h3 className="text-primary font-bold text-3xl mb-5">All Product </h3>
-            <div className=" mt-6">
-
-                <h3 className="text-primary font-bold text-xl ml-5 mb-4">All Category </h3>
-                <button onClick={() => handlelCategory("all")} className='btn btn-primary mx-5'>All</button>
-                <button onClick={() => handlelCategory("male")} className='btn btn-primary mx-5'>Male</button>
-                <button onClick={() => handlelCategory("female")} className='btn btn-primary mx-5'>Female</button>
-                <button onClick={() => handlelCategory("baby")} className='btn btn-primary mx-5'>Baby</button>
-            </div>
+            <h2>Category</h2>
+            <h1>ASSS: {products.length}</h1>
             <div className=" mt-10 grid gap-[34px] grid-cols-1  md:grid-cols-2 lg:grid-cols-2 ">
                 {
                     products.map(product => <div className="card lg:card-side mb-8 bg-base-100  shadow-xl" key={product._id}>
@@ -131,10 +88,6 @@ const AllProduct = () => {
                     </div>
                     )}
             </div>
-
-
-
-
             {
                 booking && <PrivateRoutes>
                     <BookingModal
@@ -154,9 +107,8 @@ const AllProduct = () => {
                     </BookingModal>
                 </PrivateRoutes>
             }
-        </div >
-
+        </div>
     );
 };
 
-export default AllProduct;
+export default CategoryProduct;

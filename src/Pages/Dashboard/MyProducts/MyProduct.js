@@ -1,14 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
-import { format } from 'date-fns';
 import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthProvider';
 import ConfirmationModal from '../../Sheard/ConfirmationModal/ConfirmationModal';
 
 const MyProduct = () => {
     const { user } = useContext(AuthContext);
     const [deleteUser, setDeleteUser] = useState(null);
-
+    // console.log(user.uid);
     const closeModal = () => {
         setDeleteUser(null);
     }
@@ -57,11 +57,13 @@ const MyProduct = () => {
 
     return (
         <div>
-            <h2 className='text-primary text-2xl font-bold'>My All Product : {products.length}</h2>
+            <h2 className='text-primary text-2xl  font-bold'>My All Product : {products.length}</h2>
             <div>
-                <h3 className='text-3xl my-8 font-bold text-primary'>All User</h3>
 
                 <div className="overflow-x-auto w-full">
+                    <div>
+                        <Link to={'/dashboard/advertice'} className='btn btn-primary mb-10'>Add A Advertisement On Home Page </Link>
+                    </div>
                     <table className="table w-full">
                         <thead>
                             <tr>
@@ -70,7 +72,7 @@ const MyProduct = () => {
                                 <th>Product Name</th>
                                 <th>Email</th>
                                 <th>Date</th>
-                                {/* <th>Admin</th> */}
+                                <th>Do Advertise</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -97,7 +99,7 @@ const MyProduct = () => {
                                         {product.email ? product.email : user.uid}
                                     </td>
                                     <td>{product.date}</td>
-                                    {/* <td>{user?.role !== 'admin' ? <button onClick={() => handleMakeAdmin(user._id)} className="btn btn-ghost btn-xs">Make Admin</button> : <>Admin</>}</td> */}
+                                    <td><button className="btn  btn-primary btn-xs">Addvertise</button></td>
                                     <th>
                                         <label htmlFor="modal" onClick={() => setDeleteUser(product)} className="btn  btn-ghost btn-xs">Delete</label>
 

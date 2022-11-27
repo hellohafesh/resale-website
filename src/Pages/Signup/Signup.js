@@ -177,7 +177,7 @@ const Signup = () => {
                             {errors.phone && <p role='alert' className='text-red-400 '>{errors.phone?.message}</p>}
 
                             <input {...register("image")}
-                                type="file" className="input input-bordered text-primary w-96 my-2 " />
+                                type="file" className="file-input file-input-bordered file-input-primary text-primary w-96 my-2 " />
                             {errors.image && <p role='alert' className='text-red-400 '>{errors.image?.message}</p>}
 
                             <input {...register("password",

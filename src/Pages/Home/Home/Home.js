@@ -6,7 +6,7 @@ import Services from './Services/Services';
 const Home = () => {
     return (
         <div>
-            <div className="hero  min-h-screen" style={{ backgroundImage: `url("https://scontent.xx.fbcdn.net/v/t1.15752-9/316052723_2365696086939031_5444891062665078984_n.jpg?stp=dst-jpg_p296x100&_nc_cat=111&ccb=1-7&_nc_sid=aee45a&_nc_eui2=AeHkPMR60ZIxa0oOxnnwbF_XlSNQ9AcyL16VI1D0BzIvXjEzLd-X1-8cu_CchQrhumyo5ptTbJfeNfh2iW0_KP2r&_nc_ohc=uNogC-JCBMQAX9tMB8h&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AdS1daiDB0mtpnMdUQQWOOZEaj_IbX0yqjxgKDhFkDzorQ&oe=63A5E5CF")` }}>
+            <div className="hero  h-screen" style={{ backgroundImage: `url("https://scontent.xx.fbcdn.net/v/t1.15752-9/316052723_2365696086939031_5444891062665078984_n.jpg?stp=dst-jpg_p296x100&_nc_cat=111&ccb=1-7&_nc_sid=aee45a&_nc_eui2=AeHkPMR60ZIxa0oOxnnwbF_XlSNQ9AcyL16VI1D0BzIvXjEzLd-X1-8cu_CchQrhumyo5ptTbJfeNfh2iW0_KP2r&_nc_ohc=uNogC-JCBMQAX9tMB8h&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AdS1daiDB0mtpnMdUQQWOOZEaj_IbX0yqjxgKDhFkDzorQ&oe=63A5E5CF")` }}>
                 <div className="hero-overlay bg-opacity-60"></div>
                 <div className="hero-content text-center text-neutral-content">
                     <div className="max-w-md">
@@ -16,8 +16,9 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-            <Ads></Ads>
             <Product></Product>
+            <Ads></Ads>
+
             <Services></Services>
         </div>
     );
