@@ -12,7 +12,7 @@ const AllUsers = () => {
 
 
     // load all users in clinte
-    const url = 'http://localhost:7000/users';
+    const url = 'https://poridhan-com-server-soumik825.vercel.app/users';
     const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
@@ -34,7 +34,7 @@ const AllUsers = () => {
     // console.log(users);
     //delete user
     const deleteUserDB = user => {
-        fetch(`http://localhost:7000/userdelete/${user._id}`, {
+        fetch(`https://poridhan-com-server-soumik825.vercel.app/userdelete/${user._id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -55,7 +55,7 @@ const AllUsers = () => {
 
     //admin made api
     const handleMakeAdmin = id => {
-        fetch(`http://localhost:7000/users/admin/${id}`, {
+        fetch(`https://poridhan-com-server-soumik825.vercel.app/users/admin/${id}`, {
             method: 'PUT',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`

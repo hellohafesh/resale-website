@@ -7,7 +7,7 @@ const Dashboard = () => {
 
 
     // load all booked product in clinte
-    const url = `http://localhost:7000/booked/${user.uid}`;
+    const url = `https://poridhan-com-server-soumik825.vercel.app/booked/${user.uid}`;
     const { data: booked = [], } = useQuery({
         queryKey: ['booked'],
         queryFn: async () => {

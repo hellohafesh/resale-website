@@ -117,7 +117,7 @@ const Signup = () => {
 
     const saveUserDB = (uid, name, email, seller, photo) => {
         const dbUser = { uid, name, email, seller, photo };
-        fetch('http://localhost:7000/users', {
+        fetch('https://poridhan-com-server-soumik825.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

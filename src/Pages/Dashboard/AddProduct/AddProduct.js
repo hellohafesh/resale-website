@@ -46,7 +46,7 @@ const AddProduct = () => {
 
         const saveproductDB = (uid, email, name, price, originalprice, condition, location, category, year, phone, message, date, photo, sellerPhoto, booking, addvertise) => {
             const product = { uid, email, name, price, originalprice, condition, location, category, year, phone, message, date, photo, sellerPhoto, booking, addvertise };
-            fetch('http://localhost:7000/addproduct', {
+            fetch('https://poridhan-com-server-soumik825.vercel.app/addproduct', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
