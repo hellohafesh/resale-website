@@ -18,6 +18,7 @@ const Signup = () => {
     const githubProvider = new GithubAuthProvider();
     const facebookProvider = new FacebookAuthProvider();
     const [userEmail, setUserEmail] = useState('')
+    const [loading, setLoading] = useState(false);
     const [token] = useToken(userEmail);
     const location = useLocation();
     const navigate = useNavigate();
@@ -65,7 +66,7 @@ const Signup = () => {
     // Normal sign in
     const handleSignup = data => {
         console.log(data);
-
+        setLoading(true);
         //image host 
         const imagee = data.image[0];
         // console.log(image);
@@ -98,6 +99,7 @@ const Signup = () => {
                             updateUser(userInfo)
                                 .then(() => {
                                     saveUserDB(user.uid, data.name, data.email, data.seller, user.photoURL);
+                                    setLoading(false);
                                 })
                                 .catch(error => {
                                     console.log(error);
@@ -117,7 +119,7 @@ const Signup = () => {
 
     const saveUserDB = (uid, name, email, seller, photo) => {
         const dbUser = { uid, name, email, seller, photo };
-        fetch('https://poridhan-com-server-soumik825.vercel.app/users', {
+        fetch(' https://poridhan-com-server-soumik825.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -196,7 +198,7 @@ const Signup = () => {
                             {errors.seller && <p role='alert' className='text-red-400 '>{errors.seller?.message}</p>}
 
 
-                            <input type="submit" value='Sign Up' className="btn btn-primary w-96 my-4" />
+                            {loading ? <button className="btn btn-primary w-96 my-4 loading">Proccecing</button> : <input type="submit" value='Sign Up' className="btn btn-primary w-96 my-4" />}
 
                             <label className="label">
                                 <p>Already Have Account, <Link to='/login' className="link  link-hover text-primary font-bold">Login</Link></p>

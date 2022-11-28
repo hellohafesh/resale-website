@@ -20,7 +20,7 @@ const Login = () => {
     const [userlogEmail, setUserlogEmail] = useState('');
     const [token] = useToken(userlogEmail);
     const from = location.state?.from?.pathname || '/';
-
+    const [loading, setLoading] = useState(false);
 
     if (token) {
         navigate(from, { replace: true });
@@ -64,13 +64,14 @@ const Login = () => {
     //normal login
     const handleLogin = data => {
         // console.log(data);
+        setLoading(true);
         setLoginError('');
         signin(data.email, data.password)
             .then(result => {
                 const user = result.user;
                 console.log(user);
                 setUserlogEmail(data.email);
-
+                setLoading(false);
             })
             .catch(error => {
                 console.log(error);
@@ -109,7 +110,7 @@ const Login = () => {
 
 
 
-                            <input type="submit" value='Login' className="btn btn-primary w-96 my-4" />
+                            {loading ? <button className="btn btn-primary w-96 my-4 loading">Proccecing</button> : <input type="submit" value='Login' className="btn btn-primary w-96 my-4" />}
 
                             <label className="label">
                                 <p>Are you new here, <Link to='/signup' className="link  link-hover text-primary font-bold">Signup</Link></p>

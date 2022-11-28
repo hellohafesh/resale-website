@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { useLoaderData, useNavigate } from 'react-router-dom';
+import { Link, useLoaderData, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
 import PrivateRoutes from '../../Routes/PrivateRoutes/PrivateRoutes';
 import BookingModal from '../Sheard/BookingModal/BookingModal';
@@ -24,7 +24,7 @@ const CategoryProduct = () => {
     const bookingDB = (productName, productPhoto, buyername, price, buyerLocation, buyerEmail, sellerUid, buyerUid, productid) => {
 
         const products = { productName, productPhoto, buyername, price, buyerLocation, buyerEmail, sellerUid, buyerUid, productid };
-        fetch('https://poridhan-com-server-soumik825.vercel.app/addbooking', {
+        fetch(' https://poridhan-com-server-soumik825.vercel.app/addbooking', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -47,7 +47,14 @@ const CategoryProduct = () => {
     }
     return (
         <div>
+            <div className=" mt-6">
 
+                <h3 className="text-primary font-bold text-xl ml-5 mb-4">All Category </h3>
+                {/* <button onClick={() => handlelCategory("all")} to='/allproducts/male' className='btn btn-primary mx-5'>All</button> */}
+                <Link to='/allproducts/male' className='btn btn-primary mx-5'>Male</Link>
+                <Link to='/allproducts/female' className='btn btn-primary mx-5'>Female</Link>
+                <Link to='/allproducts/baby' className='btn btn-primary mx-5'>Baby</Link>
+            </div>
             <h1 className='text-primary text-2xl  font-bold'>Total Product: {products.length}</h1>
             <div className=" mt-10 grid gap-[34px] grid-cols-1  md:grid-cols-2 lg:grid-cols-2 ">
                 {

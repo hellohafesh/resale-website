@@ -5,7 +5,7 @@ const useSeller = email => {
     const [isSellerLoading, setIsSellerLoading] = useState(true);
     useEffect(() => {
         if (email) {
-            fetch(`https://poridhan-com-server-soumik825.vercel.app/users/seller/${email}`)
+            fetch(` https://poridhan-com-server-soumik825.vercel.app/users/seller/${email}`)
                 .then(res => res.json())
                 .then(data => {
                     // console.log(data);

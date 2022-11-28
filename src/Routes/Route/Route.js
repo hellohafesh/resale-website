@@ -15,6 +15,7 @@ import MyProduct from "../../Pages/Dashboard/MyProducts/MyProduct";
 import ReportItems from "../../Pages/Dashboard/ReportItems/ReportItems";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
+import FourZeroFour from "../../Pages/Sheard/FourZeroFour/FourZeroFour";
 import Signup from "../../Pages/Signup/Signup";
 import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
@@ -37,12 +38,13 @@ const router = createBrowserRouter([
             {
                 path: '/allproducts/:Category',
                 element: <CategoryProduct></CategoryProduct>,
-                loader: ({ params }) => fetch(`https://poridhan-com-server-soumik825.vercel.app/products/${params.Category}`)
+                loader: ({ params }) => fetch(` https://poridhan-com-server-soumik825.vercel.app/products/${params.Category}`)
             },
             {
                 path: '/blogs',
                 element: <Blogs></Blogs>
             },
+
         ]
     },
     // Dashboard layout with header and footer
@@ -98,6 +100,10 @@ const router = createBrowserRouter([
                 element: <Signup></Signup>
             },
         ]
-    }
+    },
+    {
+        path: '/*',
+        element: <FourZeroFour></FourZeroFour>
+    },
 ])
 export default router;

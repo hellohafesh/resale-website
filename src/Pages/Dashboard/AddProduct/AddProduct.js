@@ -1,5 +1,5 @@
 import { format } from 'date-fns';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
@@ -8,7 +8,8 @@ import { AuthContext } from '../../../Context/AuthProvider';
 const AddProduct = () => {
 
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const { user } = useContext(AuthContext);
+    const { user, } = useContext(AuthContext);
+    const [loading, setLoading] = useState(false);
     const finddate = new Date();
     const date = format(finddate, 'PP');
     // console.log(d)
@@ -18,7 +19,7 @@ const AddProduct = () => {
 
 
     const handleAddProduct = data => {
-        // console.log(data);
+        setLoading(true);
 
         const imagee = data.image[0];
         // console.log(image);
@@ -34,8 +35,8 @@ const AddProduct = () => {
                 if (imageData.success) {
                     const imgurl = imageData.data.url;
                     // console.log(imgurl);
-                    const booking = false;
-                    const addvertise = false;
+                    const booking = "false";
+                    const addvertise = "false";
                     saveproductDB(user.uid, data.email, data.name, data.price, data.originalprice, data.condition, data.location, data.category, data.year, data.phone, data.message, date, imgurl, user.photoURL, booking, addvertise);
 
 
@@ -46,7 +47,7 @@ const AddProduct = () => {
 
         const saveproductDB = (uid, email, name, price, originalprice, condition, location, category, year, phone, message, date, photo, sellerPhoto, booking, addvertise) => {
             const product = { uid, email, name, price, originalprice, condition, location, category, year, phone, message, date, photo, sellerPhoto, booking, addvertise };
-            fetch('https://poridhan-com-server-soumik825.vercel.app/addproduct', {
+            fetch(' https://poridhan-com-server-soumik825.vercel.app/addproduct', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -61,6 +62,7 @@ const AddProduct = () => {
                     if (data.acknowledged === true) {
                         toast.success('Product Upload Successfully.');
                         navigate('/dashboard/myproducts');
+                        setLoading(false);
                     }
 
                 })
@@ -153,7 +155,7 @@ const AddProduct = () => {
 
 
 
-                            <input type="submit" value='Upload Your Product' className="btn btn-primary w-96 my-4" />
+                            {loading ? <button className="btn btn-primary w-96 my-4 loading">Submitting</button> : <input type="submit" value='Upload Your Product' className="btn btn-primary w-96 my-4" />}
 
 
 

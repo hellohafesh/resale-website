@@ -20,6 +20,7 @@ const Nav = () => {
         <li><Link className='rounded-box' to="/allproducts">All Product </Link></li>
         <li><Link className='rounded-box' to="/dashboard">Dashbord</Link></li>
         <li><Link className='rounded-box' to="/blogs">Blogs</Link></li>
+        <li><Link className='rounded-box' to="/ll">404</Link></li>
         {
             user?.uid ? <>
 

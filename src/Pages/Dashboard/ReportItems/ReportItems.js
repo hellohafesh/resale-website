@@ -14,7 +14,7 @@ const ReportItems = () => {
 
 
     // load all users in clinte
-    const url = `https://poridhan-com-server-soumik825.vercel.app/report`;
+    const url = ` https://poridhan-com-server-soumik825.vercel.app/report`;
     const { data: products = [], refetch } = useQuery({
         queryKey: ['products'],
         queryFn: async () => {
@@ -37,7 +37,7 @@ const ReportItems = () => {
 
 
     const deleteUserDB = products => {
-        fetch(`https://poridhan-com-server-soumik825.vercel.app/products/${products._id}`, {
+        fetch(` https://poridhan-com-server-soumik825.vercel.app/products/${products._id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
