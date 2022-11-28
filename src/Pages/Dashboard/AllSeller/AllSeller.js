@@ -53,7 +53,6 @@ const AllSeller = () => {
     }
 
 
-
     //admin made api
     const handleMakeVerifie = id => {
         fetch(`  https://poridhan-com-server-soumik825.vercel.app/users/verifide/${id}`, {

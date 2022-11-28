@@ -87,7 +87,6 @@ const AddProduct = () => {
                             </Link>
                         </div>
                         <h1 className="text-5xl font-bold mb-8">Add New Product</h1>
-
                     </div>
                     <div className="card flex-shrink-0 w-full  shadow-2xl bg-base-100">
 

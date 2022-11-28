@@ -81,7 +81,6 @@ const AllUsers = () => {
                 <table className="table w-full">
                     <thead>
                         <tr>
-
                             <th>Image</th>
                             <th>Name</th>
                             <th>Email</th>
