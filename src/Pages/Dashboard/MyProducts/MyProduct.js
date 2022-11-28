@@ -15,7 +15,7 @@ const MyProduct = () => {
 
 
     // load all product in clinte
-    const url = ` https://poridhan-com-server-soumik825.vercel.app/myproducts/${user.uid}`;
+    const url = ` http://localhost:7000/myproducts/${user.uid}`;
     const { data: products = [], refetch } = useQuery({
         queryKey: ['products'],
         queryFn: async () => {
@@ -36,7 +36,7 @@ const MyProduct = () => {
     })
     // console.log(products);
     const deleteUserDB = products => {
-        fetch(` https://poridhan-com-server-soumik825.vercel.app/products/${products._id}`, {
+        fetch(` http://localhost:7000/products/${products._id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -56,7 +56,7 @@ const MyProduct = () => {
 
 
     const handleAdds = id => {
-        fetch(` https://poridhan-com-server-soumik825.vercel.app/adds/${id}`, {
+        fetch(` http://localhost:7000/adds/${id}`, {
             method: 'PUT'
         })
             .then(res => res.json())

@@ -98,8 +98,9 @@ const Signup = () => {
 
                             updateUser(userInfo)
                                 .then(() => {
-                                    saveUserDB(user.uid, data.name, data.email, data.seller, user.photoURL);
-                                    setLoading(false);
+                                    const verifide = "false";
+                                    saveUserDB(user.uid, data.name, data.email, data.seller, user.photoURL, verifide);
+
                                 })
                                 .catch(error => {
                                     console.log(error);
@@ -117,9 +118,10 @@ const Signup = () => {
 
     }
 
-    const saveUserDB = (uid, name, email, seller, photo) => {
-        const dbUser = { uid, name, email, seller, photo };
-        fetch(' https://poridhan-com-server-soumik825.vercel.app/users', {
+    const saveUserDB = (uid, name, email, seller, photo, verifide) => {
+        console.log(verifide);
+        const dbUser = { uid, name, email, seller, photo, verifide };
+        fetch(' http://localhost:7000/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -134,6 +136,7 @@ const Signup = () => {
                 if (data.acknowledged === true) {
                     toast.success('User Create Successfully.');
                     setUserEmail(email);
+                    setLoading(false);
                 }
 
             })

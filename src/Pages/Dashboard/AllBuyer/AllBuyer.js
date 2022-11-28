@@ -9,7 +9,7 @@ const AllBuyer = () => {
     const closeModal = () => {
         setDeleteUser(null);
     }
-    const url = ' https://poridhan-com-server-soumik825.vercel.app/onlyusers';
+    const url = ' http://localhost:7000/onlyusers';
     const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
@@ -31,7 +31,7 @@ const AllBuyer = () => {
 
     //delete user
     const deleteUserDB = seller => {
-        fetch(` https://poridhan-com-server-soumik825.vercel.app/userdelete/${seller._id}`, {
+        fetch(` http://localhost:7000/userdelete/${seller._id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`

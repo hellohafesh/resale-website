@@ -10,7 +10,7 @@ const AllSeller = () => {
     const closeModal = () => {
         setDeleteUser(null);
     }
-    const url = ' https://poridhan-com-server-soumik825.vercel.app/allseller';
+    const url = ' http://localhost:7000/allseller';
     const { data: sellers = [], refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
@@ -33,7 +33,7 @@ const AllSeller = () => {
 
     //delete user
     const deleteUserDB = seller => {
-        fetch(` https://poridhan-com-server-soumik825.vercel.app/userdelete/${seller._id}`, {
+        fetch(` http://localhost:7000/userdelete/${seller._id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -53,6 +53,23 @@ const AllSeller = () => {
     }
 
 
+
+    //admin made api
+    const handleMakeVerifie = id => {
+        fetch(` http://localhost:7000/users/verifide/${id}`, {
+            method: 'PUT',
+
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount > 0) {
+                    console.log(data);
+                    toast.success('Successfull Made Verifide ');
+                    refetch();
+                }
+            })
+    }
+
     return (
         <div>
             <h3 className='text-3xl my-8 font-bold text-primary'>All Seller</h3>
@@ -62,16 +79,32 @@ const AllSeller = () => {
                     <thead>
                         <tr>
 
+                            <th>Image</th>
                             <th>Name</th>
                             <th>Email</th>
                             <th>Role</th>
+                            <th>Do Verifide</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
 
+                        {/* http://localhost:3000/users/verifide/:id */}
+
                         {
                             sellers.map(seller => <tr key={seller._id}>
+                                <td>
+                                    {seller.verifide ?
+                                        <div className="indicator">
+                                            <span className="indicator-item badge badge-primary"></span>
+                                            <img alt='' className='h-20 w-20 rounded-xl' src={seller.photo} />
+                                        </div>
+                                        :
+                                        <img alt='' className='h-20 w-20 rounded-xl' src={seller.photo} />
+
+
+                                    }
+                                </td>
 
                                 <td>
                                     <div className="flex items-center space-x-3">
@@ -85,6 +118,7 @@ const AllSeller = () => {
                                     {seller.email ? seller.email : seller.uid}
                                 </td>
                                 <td>{seller.seller ? <>Seller</> : <>No role</>}</td>
+                                <td>{seller.verifide ? <p className='text-primary font-bold'>Verifide</p> : <button onClick={() => handleMakeVerifie(seller.email)} className='btn btn-xs btn-primary'>Do Verifide</button>}</td>
 
                                 <th>
                                     <label htmlFor="modal" onClick={() => setDeleteUser(seller)} className="btn  btn-ghost btn-xs">Delete</label>

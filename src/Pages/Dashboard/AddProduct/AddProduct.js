@@ -34,7 +34,8 @@ const AddProduct = () => {
             .then(imageData => {
                 if (imageData.success) {
                     const imgurl = imageData.data.url;
-                    // console.log(imgurl);
+                    console.log(user.verifide);
+                    console.log(data);
                     const booking = "false";
                     const addvertise = "false";
                     saveproductDB(user.uid, data.email, data.name, data.price, data.originalprice, data.condition, data.location, data.category, data.year, data.phone, data.message, date, imgurl, user.photoURL, booking, addvertise);
@@ -47,7 +48,7 @@ const AddProduct = () => {
 
         const saveproductDB = (uid, email, name, price, originalprice, condition, location, category, year, phone, message, date, photo, sellerPhoto, booking, addvertise) => {
             const product = { uid, email, name, price, originalprice, condition, location, category, year, phone, message, date, photo, sellerPhoto, booking, addvertise };
-            fetch(' https://poridhan-com-server-soumik825.vercel.app/addproduct', {
+            fetch(' http://localhost:7000/addproduct', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -67,6 +68,8 @@ const AddProduct = () => {
 
                 })
         }
+
+
 
 
     }

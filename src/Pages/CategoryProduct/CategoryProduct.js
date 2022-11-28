@@ -24,7 +24,7 @@ const CategoryProduct = () => {
     const bookingDB = (productName, productPhoto, buyername, price, buyerLocation, buyerEmail, sellerUid, buyerUid, productid) => {
 
         const products = { productName, productPhoto, buyername, price, buyerLocation, buyerEmail, sellerUid, buyerUid, productid };
-        fetch(' https://poridhan-com-server-soumik825.vercel.app/addbooking', {
+        fetch(' http://localhost:7000/addbooking', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
