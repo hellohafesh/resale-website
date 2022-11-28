@@ -15,7 +15,7 @@ const MyProduct = () => {
 
 
     // load all users in clinte
-    const url = `http://localhost:7000/products/${user.uid}`;
+    const url = `http://localhost:7000/myproducts/${user.uid}`;
     const { data: products = [], refetch } = useQuery({
         queryKey: ['products'],
         queryFn: async () => {
@@ -44,7 +44,6 @@ const MyProduct = () => {
         })
             .then(res => res.json())
             .then(data => {
-                // console.log(data)
                 if (data.deletedCount > 0) {
                     toast.success('Successfull Delete ');
                     closeModal(null);
@@ -55,6 +54,21 @@ const MyProduct = () => {
 
     }
 
+
+    const handleAdds = id => {
+        fetch(`http://localhost:7000/adds/${id}`, {
+            method: 'PUT'
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                toast.success('Product Add On Home Successfully.');
+                refetch();
+
+            })
+    }
+
+
     return (
         <div>
             <h2 className='text-primary text-2xl  font-bold'>My All Product : {products.length}</h2>
@@ -62,7 +76,7 @@ const MyProduct = () => {
 
                 <div className="overflow-x-auto w-full">
                     <div>
-                        <Link to={'/dashboard/advertice'} className='btn btn-primary mb-10'>Add A Advertisement On Home Page </Link>
+                        <Link to={'/dashboard/advertice'} className='btn btn-primary my-10'>Add A Advertisement On Home Page </Link>
                     </div>
                     <table className="table w-full">
                         <thead>
@@ -99,7 +113,9 @@ const MyProduct = () => {
                                         {product.email ? product.email : user.uid}
                                     </td>
                                     <td>{product.date}</td>
-                                    <td><button className="btn  btn-primary btn-xs">Addvertise</button></td>
+                                    <td>{product.addvertise === "false" ? <button onClick={() => handleAdds(product._id)} className="btn  btn-primary btn-xs">Addvertise</button> : <>ADD Showing</>
+                                    }
+                                    </td>
                                     <th>
                                         <label htmlFor="modal" onClick={() => setDeleteUser(product)} className="btn  btn-ghost btn-xs">Delete</label>
 
@@ -108,7 +124,6 @@ const MyProduct = () => {
                             }
 
                         </tbody>
-
 
                     </table>
                     {

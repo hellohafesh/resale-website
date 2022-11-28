@@ -1,3 +1,4 @@
+import { MdReport } from '@react-icons/all-files/md/MdReport';
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -10,6 +11,7 @@ import BookingModal from '../Sheard/BookingModal/BookingModal';
 const AllProduct = () => {
     const { user } = useContext(AuthContext);
     const [booking, setBooking] = useState(null);
+    const [reportItem, setReportItem] = useState(null)
     const [category, setCategory] = useState("all");
     const navigate = useNavigate();
     const { register, handleSubmit } = useForm();
@@ -64,16 +66,27 @@ const AllProduct = () => {
 
                 if (data.acknowledged === true) {
                     closeModal();
-                    toast.success('Product Booking Successfully.');
-                    navigate('/dashboard');
-                    refetch();
+                    setBookingdb(productid);
                 }
 
             })
 
     }
 
-
+    const handleRreport = data => {
+        fetch(`http://localhost:7000/report/${data._id}`, {
+            method: 'PUT'
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                toast('Reort Submit Successfully.');
+                navigate('/dashboard');
+                setReportItem(null);
+                refetch();
+            })
+        // console.log(data);
+    }
 
     const handlelCategory = (data) => {
         setCategory(data);
@@ -81,6 +94,19 @@ const AllProduct = () => {
         refetch();
     }
 
+
+    const setBookingdb = id => {
+        fetch(`http://localhost:7000/bookproducts/${id}`, {
+            method: 'PUT'
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                toast.success('Product Booking Successfully.');
+                navigate('/dashboard');
+                refetch();
+            })
+    }
     return (
         <div>
             <h3 className="text-primary font-bold text-3xl mb-5">All Product </h3>
@@ -97,7 +123,14 @@ const AllProduct = () => {
                     products.map(product => <div className="card lg:card-side mb-8 bg-base-100  shadow-xl" key={product._id}>
                         <figure><img className='h-80 w-80' src={product.photo} alt="Album" /></figure>
                         <div className="card-body">
-                            <h2 className="card-title">{product.name}</h2>
+                            <div className=' flex justify-between'>
+                                <h2 className="card-title">{product.name}</h2>
+
+                                <label onClick={() => setReportItem(product)} htmlFor="report-modal" className=''>
+                                    <MdReport className='h-5 w-5 text-primary mx-auto ' />
+                                    <p className='text-[10px]'>Report this post</p>
+                                </label>
+                            </div>
                             <p><span className='font-bold'>Discription :</span> {product.message}</p>
 
                             <p className='font-bold'>Price : <span className='text-xl text-primary '>${product.price}</span> </p>
@@ -154,6 +187,38 @@ const AllProduct = () => {
                     </BookingModal>
                 </PrivateRoutes>
             }
+
+
+
+
+
+
+            {reportItem && <PrivateRoutes>
+                <input type="checkbox" id="report-modal" className="modal-toggle" />
+                <div className="modal modal-bottom sm:modal-middle">
+                    <div className="modal-box">
+                        <label onClick={() => setReportItem(null)} className="btn btn-sm btn-circle btn-primary absolute right-2 top-2">✕</label>
+                        <h3 className="font-bold text-lg">Are You Sure You Wnat TO Report This Item ?</h3>
+                        <p className="py-4">Product Name : {reportItem.name} . Seller Email : {reportItem.email} .Seller Location : {reportItem.location}. Old price: ${reportItem.price} . Sell Price : ${reportItem.price}.</p>
+                        <div className="modal-action">
+                            <button onClick={() => handleRreport(reportItem)} htmlFor="report-modal" className="btn btn-error mx-auto">Submit Your Report!</button>
+                        </div>
+                    </div>
+                </div>
+
+            </PrivateRoutes>}
+
+
+
+
+
+
+
+
+
+
+
+
         </div >
 
     );
