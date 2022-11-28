@@ -7,11 +7,6 @@ const FourZeroFour = () => {
         <>
             <div className='body1'>
                 <div className='div1'>
-
-
-
-
-
                     <div className='div1'>
                         <svg className='ssvg' width="1123" height="837" viewBox="0 0 1123 837" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect width="1123" height="837" fill="black" />
