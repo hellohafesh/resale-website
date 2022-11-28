@@ -69,9 +69,6 @@ const AddProduct = () => {
                 })
         }
 
-
-
-
     }
     return (
         <div>
