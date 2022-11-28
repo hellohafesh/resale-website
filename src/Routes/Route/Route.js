@@ -38,7 +38,7 @@ const router = createBrowserRouter([
             {
                 path: '/allproducts/:Category',
                 element: <CategoryProduct></CategoryProduct>,
-                loader: ({ params }) => fetch(` http://localhost:7000/products/${params.Category}`)
+                loader: ({ params }) => fetch(`  https://poridhan-com-server-soumik825.vercel.app/products/${params.Category}`)
             },
             {
                 path: '/blogs',

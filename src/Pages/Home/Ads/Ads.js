@@ -17,7 +17,7 @@ const Ads = () => {
         setBooking(null);
     }
 
-    const url = ' http://localhost:7000/adds';
+    const url = '  https://poridhan-com-server-soumik825.vercel.app/adds';
     const { data: adds = [], refetch } = useQuery({
         queryKey: ['adds'],
         queryFn: async () => {
@@ -47,7 +47,7 @@ const Ads = () => {
     const bookingDB = (productName, productPhoto, buyername, price, buyerLocation, buyerEmail, sellerUid, buyerUid, productid) => {
 
         const products = { productName, productPhoto, buyername, price, buyerLocation, buyerEmail, sellerUid, buyerUid, productid };
-        fetch(' http://localhost:7000/addbooking', {
+        fetch('  https://poridhan-com-server-soumik825.vercel.app/addbooking', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -70,7 +70,7 @@ const Ads = () => {
 
 
     const setBookingdb = id => {
-        fetch(` http://localhost:7000/bookproducts/${id}`, {
+        fetch(`  https://poridhan-com-server-soumik825.vercel.app/bookproducts/${id}`, {
             method: 'PUT'
         })
             .then(res => res.json())

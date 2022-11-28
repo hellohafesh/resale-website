@@ -24,7 +24,7 @@ const AllProduct = () => {
         queryKey: ['products'],
         queryFn: async () => {
             try {
-                const res = await fetch(` http://localhost:7000/totalproducts`, {
+                const res = await fetch(`  https://poridhan-com-server-soumik825.vercel.app/totalproducts`, {
                     headers: {
                         authorization: `bearer ${localStorage.getItem('accessToken')}`
                     }
@@ -51,7 +51,7 @@ const AllProduct = () => {
     const bookingDB = (productName, productPhoto, buyername, price, buyerLocation, buyerEmail, sellerUid, buyerUid, productid) => {
 
         const products = { productName, productPhoto, buyername, price, buyerLocation, buyerEmail, sellerUid, buyerUid, productid };
-        fetch(' http://localhost:7000/addbooking', {
+        fetch('  https://poridhan-com-server-soumik825.vercel.app/addbooking', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -73,7 +73,7 @@ const AllProduct = () => {
     }
 
     const handleRreport = data => {
-        fetch(` http://localhost:7000/report/${data._id}`, {
+        fetch(`  https://poridhan-com-server-soumik825.vercel.app/report/${data._id}`, {
             method: 'PUT'
         })
             .then(res => res.json())
@@ -94,7 +94,7 @@ const AllProduct = () => {
     // console.log(products);
 
     const setBookingdb = id => {
-        fetch(` http://localhost:7000/bookproducts/${id}`, {
+        fetch(`  https://poridhan-com-server-soumik825.vercel.app/bookproducts/${id}`, {
             method: 'PUT'
         })
             .then(res => res.json())

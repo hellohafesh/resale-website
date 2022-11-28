@@ -42,7 +42,7 @@ const AddverticeAdd = () => {
 
         const saveproductDB = (uid, email, name, price, condition, originalprice, location, category, year, phone, message, date, photo, sellerPhoto) => {
             const product = { uid, email, name, price, originalprice, condition, location, category, year, phone, message, date, photo, sellerPhoto };
-            fetch(' http://localhost:7000/advetice', {
+            fetch('  https://poridhan-com-server-soumik825.vercel.app/advetice', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
