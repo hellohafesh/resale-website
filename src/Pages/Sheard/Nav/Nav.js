@@ -22,7 +22,6 @@ const Nav = () => {
         <li><Link className='rounded-box' to="/blogs">Blogs</Link></li>
         {
             user?.uid ? <>
-                <li><Link className='rounded-box' to="/">My Card</Link></li>
 
                 <li><button onClick={handleLogOut}
                     className='rounded-box' to="/login">Logout</button></li>

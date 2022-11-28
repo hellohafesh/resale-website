@@ -47,8 +47,8 @@ const CategoryProduct = () => {
     }
     return (
         <div>
-            <h2>Category</h2>
-            <h1>ASSS: {products.length}</h1>
+
+            <h1 className='text-primary text-2xl  font-bold'>Total Product: {products.length}</h1>
             <div className=" mt-10 grid gap-[34px] grid-cols-1  md:grid-cols-2 lg:grid-cols-2 ">
                 {
                     products.map(product => <div className="card lg:card-side mb-8 bg-base-100  shadow-xl" key={product._id}>

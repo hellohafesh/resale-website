@@ -34,7 +34,7 @@ const MyProduct = () => {
 
         }
     })
-
+    // console.log(products);
     const deleteUserDB = products => {
         fetch(`https://poridhan-com-server-soumik825.vercel.app/products/${products._id}`, {
             method: 'DELETE',

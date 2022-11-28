@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
 import PrivateRoutes from '../../Routes/PrivateRoutes/PrivateRoutes';
 import BookingModal from '../Sheard/BookingModal/BookingModal';
@@ -20,13 +20,11 @@ const AllProduct = () => {
     }
 
 
-
-    const url = `https://poridhan-com-server-soumik825.vercel.app/products/${category}`;
     const { data: products = [], refetch } = useQuery({
         queryKey: ['products'],
         queryFn: async () => {
             try {
-                const res = await fetch(url, {
+                const res = await fetch(`https://poridhan-com-server-soumik825.vercel.app/totalproducts`, {
                     headers: {
                         authorization: `bearer ${localStorage.getItem('accessToken')}`
                     }
@@ -80,8 +78,7 @@ const AllProduct = () => {
             .then(res => res.json())
             .then(data => {
                 console.log(data);
-                toast('Reort Submit Successfully.');
-                navigate('/dashboard');
+                toast('Report Submit Successfully.');
                 setReportItem(null);
                 refetch();
             })
@@ -113,10 +110,10 @@ const AllProduct = () => {
             <div className=" mt-6">
 
                 <h3 className="text-primary font-bold text-xl ml-5 mb-4">All Category </h3>
-                <button onClick={() => handlelCategory("all")} className='btn btn-primary mx-5'>All</button>
-                <button onClick={() => handlelCategory("male")} className='btn btn-primary mx-5'>Male</button>
-                <button onClick={() => handlelCategory("female")} className='btn btn-primary mx-5'>Female</button>
-                <button onClick={() => handlelCategory("baby")} className='btn btn-primary mx-5'>Baby</button>
+                {/* <button onClick={() => handlelCategory("all")} to='/allproducts/male' className='btn btn-primary mx-5'>All</button> */}
+                <Link onClick={() => handlelCategory("male")} to='/allproducts/male' className='btn btn-primary mx-5'>Male</Link>
+                <Link onClick={() => handlelCategory("female")} to='/allproducts/female' className='btn btn-primary mx-5'>Female</Link>
+                <Link onClick={() => handlelCategory("baby")} to='/allproducts/baby' className='btn btn-primary mx-5'>Baby</Link>
             </div>
             <div className=" mt-10 grid gap-[34px] grid-cols-1  md:grid-cols-2 lg:grid-cols-2 ">
                 {
@@ -133,8 +130,11 @@ const AllProduct = () => {
                             </div>
                             <p><span className='font-bold'>Discription :</span> {product.message}</p>
 
-                            <p className='font-bold'>Price : <span className='text-xl text-primary '>${product.price}</span> </p>
+                            <div className='flex justify-center items-center'>
+                                <p className='font-bold'>Price : <span className=' text-primary '>${product.price}</span> </p>
+                                <p className='font-bold text-[15px]'>Original Price : <span className='text-[15px] text-primary '>${product.originalprice}</span> </p>
 
+                            </div>
                             <div className="flex justify-between border-solid border-2 border-secondery rounded-xl">
                                 <div className="p-2">
                                     <p className='text-[12px]'>Buying Year : {product.year}</p>

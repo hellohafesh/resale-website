@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Ads from '../Ads/Ads';
 import Product from '../Product/Product';
 import Services from './Services/Services';
@@ -11,8 +12,8 @@ const Home = () => {
                 <div className="hero-content text-center text-neutral-content">
                     <div className="max-w-md">
                         <h1 className="mb-5 text-3xl md:text-4xl lg:text-5xl  font-bold">Wellcome To Poridhan</h1>
-                        <p className="mb-5 lg:text-xl  font-bold">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
-                        <button className="btn btn-primary">Get Started</button>
+                        <p className="mb-5 lg:text-xl  font-bold">Here you can sell old clothes very easily, sell your clothes.Buy sell make money.</p>
+                        <Link to='/allproducts' className="btn btn-primary">Get Started</Link>
                     </div>
                 </div>
             </div>
