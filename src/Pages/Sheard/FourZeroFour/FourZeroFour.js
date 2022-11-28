@@ -7,6 +7,11 @@ const FourZeroFour = () => {
         <>
             <div className='body1'>
                 <div className='div1'>
+
+
+
+
+
                     <div className='div1'>
                         <svg className='ssvg' width="1123" height="837" viewBox="0 0 1123 837" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect width="1123" height="837" fill="black" />
@@ -30,6 +35,7 @@ const FourZeroFour = () => {
                                     <path id="Vector_15" d="M321.98 268.67H319.91V266.6H319.07V268.67H317V269.51H319.07V271.58H319.91V269.51H321.98V268.67Z" fill="white" />
                                     <path id="Vector_16" d="M956.9 333.07C957.916 333.07 958.74 332.246 958.74 331.23C958.74 330.214 957.916 329.39 956.9 329.39C955.884 329.39 955.06 330.214 955.06 331.23C955.06 332.246 955.884 333.07 956.9 333.07Z" fill="white" />
                                 </g>
+
                                 <g id="rocket">
                                     <path id="Vector_17" d="M635.46 400H466V406.78H635.46V400Z" fill="#535461" />
                                     <g id="body-rocket">
@@ -62,6 +68,7 @@ const FourZeroFour = () => {
                                         <path id="Vector_36" d="M433.431 396.448L451.231 396.538V418.478H433.431V396.448Z" fill="#535461" />
                                         <path id="Vector_37" d="M690.171 396.448L707.961 396.538V418.478H690.171V396.448Z" fill="#535461" />
                                     </g>
+
                                 </g>
                             </g>
                             <defs>
